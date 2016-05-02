@@ -43,7 +43,7 @@ discreteProbabilityDistribution<T>::discreteProbabilityDistribution(vector<pair<
 
     int big;
     int little;
-    while(!small.empty()){
+    while(!small.empty() && !large.empty()){
         big = large.front();
         little = small.front();
         large.pop();
@@ -51,7 +51,7 @@ discreteProbabilityDistribution<T>::discreteProbabilityDistribution(vector<pair<
         prob[little] = probability[little];
         alias[little] = big;
         
-        probability[big] -= 1 - prob[little];
+        probability[big] = (probability[big] + prob[little]) - 1;
         if(probability[big] < 1){
             small.push(big);
         } else{
@@ -64,6 +64,12 @@ discreteProbabilityDistribution<T>::discreteProbabilityDistribution(vector<pair<
         big = large.front();
         large.pop();
         prob[big] = 1.0;
+    }
+
+    while(!small.empty()){
+        little = small.front();
+        small.pop();
+        prob[little] = 1.0;
     }
     }
 template <typename T> 
