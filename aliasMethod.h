@@ -1,5 +1,6 @@
 #include <random>
 #include <queue>
+#pragma once
 using namespace std;
 
 template<typename T> 
@@ -8,7 +9,7 @@ class discreteProbabilityDistribution{
     public:
         discreteProbabilityDistribution(vector<pair<T, double> > aDistribution);
         T roll();
-        void foo();
+        void changeSeed(int aSeed);
     private:
         vector<T> aliasTraduction;
         vector<double> prob;
@@ -71,7 +72,7 @@ discreteProbabilityDistribution<T>::discreteProbabilityDistribution(vector<pair<
         small.pop();
         prob[little] = 1.0;
     }
-    }
+}
 template <typename T> 
 T  discreteProbabilityDistribution<T>::roll(){
 
@@ -89,8 +90,7 @@ T  discreteProbabilityDistribution<T>::roll(){
 }
 
 template <typename T>
-void discreteProbabilityDistribution<T>::foo(){
-    uniform_int_distribution<int> uid(0,prob.size());
-    int asd = uid(gen);
-    cout << asd << endl;
+
+void discreteProbabilityDistribution<T>::changeSeed(int aSeed){
+    gen.seed(aSeed);
 }
