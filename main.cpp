@@ -5,7 +5,7 @@
 using namespace std;
 int main(){      
     vector<pair<int, double>> dist;
-    dist.push_back(make_pair(0, 0.2));
+    dist.push_back(make_pair(0, 0.2 + 1e-16));
     dist.push_back(make_pair(1, 0.15));
     dist.push_back(make_pair(2, 0.05));
     dist.push_back(make_pair(3, 0.05));
@@ -17,7 +17,7 @@ int main(){
     dist.push_back(make_pair(9, 0.04));
     discreteProbabilityDistribution <int> aliasM(dist);
     vector<int> appearances(10, 0);
-    for(int i = 0; i < 1000; ++i){
+    for(int i = 0; i < 1000000; ++i){
         int rolling = aliasM.roll();
         appearances[rolling]++;
     }

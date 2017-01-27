@@ -11,7 +11,7 @@ class discreteProbabilityDistribution{
         T roll();
         void changeSeed(int aSeed);
     private:
-        vector<T> aliasTraduction;
+        vector<T> aliasTranslation;
         vector<double> prob;
         vector<int> alias;
         mt19937 gen;
@@ -26,14 +26,14 @@ discreteProbabilityDistribution<T>::discreteProbabilityDistribution(vector<pair<
     int amountOfItems = aDistribution.size();
     prob.resize(amountOfItems);
     alias.resize(amountOfItems);
-    aliasTraduction.resize(amountOfItems);
+    aliasTranslation.resize(amountOfItems);
     vector<double> probability(amountOfItems);
 
     queue<int> small;
     queue<int> large;
 
     for(int i = 0; i < amountOfItems; ++i){
-        aliasTraduction[i] = aDistribution[i].first;
+        aliasTranslation[i] = aDistribution[i].first;
         probability[i] = aDistribution[i].second * amountOfItems;
         if(probability[i] < 1){
             small.push(i);
@@ -86,7 +86,7 @@ T  discreteProbabilityDistribution<T>::roll(){
     } else{
         index = alias[rolled];
     }
-    return aliasTraduction[index];
+    return aliasTranslation[index];
 }
 
 template <typename T>
